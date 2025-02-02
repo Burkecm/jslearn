@@ -1,0 +1,52 @@
+High level
+    automatically allocates hardware resources
+garbage-collected
+    automatically de-allocates hardware resources
+interpreted
+    gets compiled to machine code line by line rather than compiling into a bin
+    modern JS engines use a mix of compilation AND translation
+multi-paradigm
+    many ways to write the same code
+    procedural, OOP, and functional programming styles
+imperative vs declarative
+    prototype bases OOP
+first-class functions
+    functions treated as variables
+dynamic
+    dynamically typed
+single-threaded; non-blocking event loop
+    JS is a single thread, the event loop is used for concurrency
+
+The Engine and the Runtime
+    The Engine - Program that executes JS eg: V8
+        Step 1 - parse the code into an Abstract Syntax Tree (AST)
+        Step 2 - compile AST into machine code
+        Step 3 - Execute the code
+    Each contains the call stack and the heap
+    call stack - executes code
+    heap - where memory objects are stored
+    The Runtime
+        Browser runtime Contains an Engine, Web APIs, and Callback Queue
+        Event Loop facilitates callback fxns
+        Node.JS runtime contains Engine, Callback Queue, and C++ bindings/thread pool (sans web APIs)
+
+Execution contexts and the callstack
+    Step 1 - Global execution context established for top-level code (anything not in an fxn)
+        Execution Context - Environment in which a piece of JS is executed. Linked to scoping.
+            What's inside?
+                Variable environment - lets, consts, functions, Arguments object
+                Scope Chain - list of scopes for all vars in the code
+                This - self-referential keyword
+                Note - Arrow functions do not get their own Args object or This keyword, inherits from parent
+    Step 2 - Execution of top-level code
+    Step 3 - execution of fxns and wait for callbacks
+
+Scoping and the Scope Chain
+    Lexical Scoping - Scope based on position on the code
+    Scope levels in JS
+        Global - Top-level
+        Function - only available inside the function it's declared in
+        Block - only applies to let and const, or fxns in strict mode. 
+            variables declared with var are scoped at the next available scope bound
+    The Scope Chain
+        Representation of parent=child scoping relationship
